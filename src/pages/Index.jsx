@@ -3,23 +3,23 @@ import { useNavigate } from 'react-router-dom'
 
 export default function Index() {
   const navigate=useNavigate()
-  const [seconds,setseconds]=useState(0)
-  const [minute,setminutes]=useState(0)
+  const [seconds,setseconds]=useState(59)
+  const [minute,setminutes]=useState(24)
 
   let timer;
   useEffect(()=>{
       timer= setInterval(()=>{
-          setseconds(seconds+1)
-          if(seconds===59){
-              setminutes(minute+1);
-              setseconds(0)
+          setseconds(seconds-1)
+          if(seconds===0){
+              setminutes(minute-1);
+              setseconds(59)
           }
       },1000)
       return ()=> clearInterval(timer)
   })
   const restart=()=>{
-      setseconds(0)
-      setminutes(0)
+      setseconds(59)
+      setminutes(24)
   }
   const stop=()=>{
       clearInterval(timer)
